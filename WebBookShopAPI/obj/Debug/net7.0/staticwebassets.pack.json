@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\SaraMaars.jpg",
+      "PackagePath": "staticwebassets\\img\\authors\\SaraMaars.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\patric_rotfuss.jpg",
+      "PackagePath": "staticwebassets\\img\\authors\\patric_rotfuss.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\robert_vegner.jpg",
+      "PackagePath": "staticwebassets\\img\\authors\\robert_vegner.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\glass_trone.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\glass_trone.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\meekh_sky_and_iron.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\meekh_sky_and_iron.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\meeks_piv-pivnch.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\meeks_piv-pivnch.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\meeks_svid_zaxid.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\meeks_svid_zaxid.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\name_of_wind.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\name_of_wind.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.WebBookShopAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.WebBookShopAPI.props",
+      "PackagePath": "build\\WebBookShopAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.WebBookShopAPI.props",
+      "PackagePath": "buildMultiTargeting\\WebBookShopAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.WebBookShopAPI.props",
+      "PackagePath": "buildTransitive\\WebBookShopAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
