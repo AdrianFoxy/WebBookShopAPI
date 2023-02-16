@@ -13,6 +13,7 @@ namespace WebBookShopAPI.Data.Repositories
 
         public async Task<IReadOnlyList<Book>> GetAllBooksCatalogAsync()
         {
+
             return await _context.Book
                 .Include(n => n.Publisher)
                 .Include(n => n.Author)

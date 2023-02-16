@@ -6,8 +6,5 @@ namespace WebBookShopAPI.Data.Models
     {
         public string Name { get; set; }
 
-        [JsonIgnore]
-        public List<Genre> Genre { get; set; }
-
     }
 }
