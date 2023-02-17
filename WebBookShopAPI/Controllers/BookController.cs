@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebBookShopAPI.Data.Dtos;
+using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Repositories;
 using WebBookShopAPI.Data.Specifications;
@@ -48,11 +48,15 @@ namespace WebBookShopAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookById(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)] // ProducesResponseType показывает вариант ответов в свагере
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<BookInCatalogDto>> GetBookById(int id)
         {
             var spec = new BookWithAllInfoSpecification(id);
 
             var response = await _bookRepository.GetEntityWithSpec(spec);
+
+            if (response == null) return NotFound(new ApiResponse(404));
             return Ok(_mapper.Map<Book, BookInCatalogDto>(response));
         }
 

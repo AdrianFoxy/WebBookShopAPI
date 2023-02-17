@@ -5,6 +5,9 @@ namespace WebBookShopAPI.Data.Models
 {
     public class Book : BaseEntity
     {
+
+        // НА ПОТОМ
+        // ДОБАВЬ ЦЕНУ, А ТАК ЖЕ ДОП КЛАСС ФОТО И БУДЕШЬ ДЕЛАТЬ МНОГО ФОТОК НА ТОВАР
         public string Title { get; set; }
         public string Description { get; set; } = string.Empty;
         public int Page { get; set; }
