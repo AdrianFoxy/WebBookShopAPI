@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
+using WebBookShopAPI.Data.Helpers;
 using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Repositories;
 using WebBookShopAPI.Data.Specifications;
@@ -37,14 +38,30 @@ namespace WebBookShopAPI.Controllers
 
 
         [HttpGet("catalog_books")]
-        public async Task<IActionResult> GetAllBooksCatalog()
+        public async Task<ActionResult<Pagination<BookInCatalogDto>>> GetAllBooksCatalog([FromQuery]BookSpecParams bookParams)
         {
-            var spec = new BookWithAllInfoSpecification();
+/*            var genresIdsList = new List<int>();
+            if (!string.IsNullOrEmpty(genres))
+                genresIdsList.AddRange(genres?.Split(',')?.Select(Int32.Parse)?.ToList());
+
+            var authorsIdsList = new List<int>();
+            if (!string.IsNullOrEmpty(authors))
+                authorsIdsList.AddRange(authors?.Split(',')?.Select(Int32.Parse)?.ToList());*/
+
+
+            var spec = new BookWithAllInfoSpecification(bookParams);
+
+            var countSpec = new BookWithFiltersCountSpecification(bookParams);
+            var totalItems = await _bookRepository.CountAsync(countSpec);
 
             var response = await _bookRepository.ListAsync(spec);
+            var data = _mapper
+                .Map<IReadOnlyList<Book>, IReadOnlyList<BookInCatalogDto>>(response);
+
+
             //return Ok(response);
             // return _mapper.Map<Book, BookInCatalogDto>(response);
-            return Ok(_mapper.Map<IReadOnlyList<Book>, IReadOnlyList<BookInCatalogDto>>(response));
+            return Ok(new Pagination<BookInCatalogDto>(bookParams.PageIndex, bookParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -57,7 +74,8 @@ namespace WebBookShopAPI.Controllers
             var response = await _bookRepository.GetEntityWithSpec(spec);
 
             if (response == null) return NotFound(new ApiResponse(404));
-            return Ok(_mapper.Map<Book, BookInCatalogDto>(response));
+            //return Ok(_mapper.Map<Book, BookInCatalogDto>(response));
+            return Ok(response);
         }
 
         [HttpGet("genres")]

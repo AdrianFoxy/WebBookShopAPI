@@ -11,6 +11,12 @@ namespace WebBookShopAPI.Data.Repositories
         {
             _context = context;
         }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();

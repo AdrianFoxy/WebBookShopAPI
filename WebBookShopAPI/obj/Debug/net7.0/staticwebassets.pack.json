@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\JordgMarting.jpg",
+      "PackagePath": "staticwebassets\\img\\authors\\JordgMarting.jpg"
+    },
+    {
       "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\SaraMaars.jpg",
       "PackagePath": "staticwebassets\\img\\authors\\SaraMaars.jpg"
     },
@@ -11,6 +15,26 @@
     {
       "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\authors\\robert_vegner.jpg",
       "PackagePath": "staticwebassets\\img\\authors\\robert_vegner.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\banket_kraken.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\banket_kraken.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\battle_of_kings.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\battle_of_kings.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\dance_of_dragons.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\dance_of_dragons.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\fure_of_swords.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\fure_of_swords.jpg"
+    },
+    {
+      "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\game_of_thrones.jpg",
+      "PackagePath": "staticwebassets\\img\\books\\game_of_thrones.jpg"
     },
     {
       "Id": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\wwwroot\\img\\books\\glass_trone.jpg",

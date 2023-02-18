@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBookShopAPI.Data;
 
@@ -10,9 +11,11 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230218031113_AddedPrice")]
+    partial class AddedPrice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,13 +225,13 @@ namespace WebBookShopAPI.Migrations
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Book", b =>
                 {
                     b.HasOne("WebBookShopAPI.Data.Models.BookSeries", "BookSeries")
-                        .WithMany("Book")
+                        .WithMany()
                         .HasForeignKey("BookSeriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebBookShopAPI.Data.Models.Publisher", "Publisher")
-                        .WithMany("Book")
+                        .WithMany()
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -241,27 +244,12 @@ namespace WebBookShopAPI.Migrations
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Genre", b =>
                 {
                     b.HasOne("WebBookShopAPI.Data.Models.CategoryGenre", "CategoryGenre")
-                        .WithMany("Genre")
+                        .WithMany()
                         .HasForeignKey("CategoryGenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CategoryGenre");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.BookSeries", b =>
-                {
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.CategoryGenre", b =>
-                {
-                    b.Navigation("Genre");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.Publisher", b =>
-                {
-                    b.Navigation("Book");
                 });
 #pragma warning restore 612, 618
         }

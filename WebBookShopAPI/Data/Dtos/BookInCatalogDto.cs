@@ -6,6 +6,7 @@
         public string Title { get; set; }
         public string ImageURL { get; set; }
         public string BookSeries { get; set; }
+        public float Price { get; set; }
         public List<string> Authors { get; set; }
     }
 }
