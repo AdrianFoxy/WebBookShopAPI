@@ -13,6 +13,8 @@
         public int? BookseriesId { get; set; }
         public List<int>? GenreIds { get; set; }
         public List<int>? AuthorIds { get; set; }
+        public List<int>? ExceptPublishersId { get; set; } 
+        public List<int>? ExceptBookSeriesId { get; set; }
 
         private string? _search;
         public string? Search 

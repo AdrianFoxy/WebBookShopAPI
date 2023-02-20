@@ -40,14 +40,6 @@ namespace WebBookShopAPI.Controllers
         [HttpGet("catalog_books")]
         public async Task<ActionResult<Pagination<BookInCatalogDto>>> GetAllBooksCatalog([FromQuery]BookSpecParams bookParams)
         {
-/*            var genresIdsList = new List<int>();
-            if (!string.IsNullOrEmpty(genres))
-                genresIdsList.AddRange(genres?.Split(',')?.Select(Int32.Parse)?.ToList());
-
-            var authorsIdsList = new List<int>();
-            if (!string.IsNullOrEmpty(authors))
-                authorsIdsList.AddRange(authors?.Split(',')?.Select(Int32.Parse)?.ToList());*/
-
 
             var spec = new BookWithAllInfoSpecification(bookParams);
 

@@ -18,7 +18,9 @@ namespace WebBookShopAPI.Data.Specifications
                 (!bookParams.PublisherId.HasValue || x.PublisherId == bookParams.PublisherId) &&
                 (!bookParams.BookseriesId.HasValue || x.BookSeriesId == bookParams.BookseriesId) &&
                 (bookParams.GenreIds == null || bookParams.GenreIds.Count == 0 || x.Genre.Any(x => bookParams.GenreIds.Contains(x.Id))) &&
-                (bookParams.AuthorIds == null || bookParams.AuthorIds.Count == 0 || x.Author.Any(x => bookParams.AuthorIds.Contains(x.Id)))
+                (bookParams.AuthorIds == null || bookParams.AuthorIds.Count == 0 || x.Author.Any(x => bookParams.AuthorIds.Contains(x.Id))) &&
+                (bookParams.ExceptBookSeriesId == null || !bookParams.ExceptBookSeriesId.Contains(x.BookSeriesId)) &&
+                (bookParams.ExceptPublishersId == null || !bookParams.ExceptPublishersId.Contains(x.PublisherId))
             )
         {
             AddInclude(x => x.Publisher);
