@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using WebBookShopAPI.Data.Models;
 
-namespace WebBookShopAPI.Data.Models
+namespace WebBookShopAPI.Data.Dtos
 {
-    public class Book : BaseEntity
+    public class SingleBookDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; } = string.Empty;
         public int Page { get; set; }
@@ -15,15 +15,9 @@ namespace WebBookShopAPI.Data.Models
         public float Price { get; set; }
         public int ReleaseYear { get; set; }
         public DateTime UploadDate { get; set; }
-        public int BookSeriesId { get; set; }
-        [ForeignKey("BookSeriesId")]
         public BookSeries BookSeries { get; set; }
-        public int PublisherId { get; set; }
-        [ForeignKey("PublisherId")]
-
         public Publisher Publisher { get; set; }
         public List<Author> Author { get; set; }
         public List<Genre> Genre { get; set; }
-        public List<SelectionOfBooks> SelectionOfBooks { get; set; }
     }
 }

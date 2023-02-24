@@ -11,8 +11,8 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230211053047_Initial")]
-    partial class Initial
+    [Migration("20230224043314_ShoppingCart")]
+    partial class ShoppingCart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,21 @@ namespace WebBookShopAPI.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("BookGenre");
+                });
+
+            modelBuilder.Entity("BookSelectionOfBooks", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SelectionOfBooksId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "SelectionOfBooksId");
+
+                    b.HasIndex("SelectionOfBooksId");
+
+                    b.ToTable("BookSelectionOfBooks");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Author", b =>
@@ -102,6 +117,9 @@ namespace WebBookShopAPI.Migrations
                     b.Property<int>("Page")
                         .HasColumnType("int");
 
+                    b.Property<float>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
 
@@ -139,37 +157,17 @@ namespace WebBookShopAPI.Migrations
                     b.ToTable("BookSeries");
                 });
 
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.CategoryGenre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoryGenre");
-                });
-
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryGenreId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryGenreId");
 
                     b.ToTable("Genre");
                 });
@@ -187,6 +185,52 @@ namespace WebBookShopAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Publisher");
+                });
+
+            modelBuilder.Entity("WebBookShopAPI.Data.Models.SelectionOfBooks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectionOfBooks");
+                });
+
+            modelBuilder.Entity("WebBookShopAPI.Data.Models.ShoppingCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShoppingCartId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("ShoppingCartItem");
                 });
 
             modelBuilder.Entity("AuthorBook", b =>
@@ -219,6 +263,21 @@ namespace WebBookShopAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BookSelectionOfBooks", b =>
+                {
+                    b.HasOne("WebBookShopAPI.Data.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBookShopAPI.Data.Models.SelectionOfBooks", null)
+                        .WithMany()
+                        .HasForeignKey("SelectionOfBooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Book", b =>
                 {
                     b.HasOne("WebBookShopAPI.Data.Models.BookSeries", "BookSeries")
@@ -238,25 +297,20 @@ namespace WebBookShopAPI.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.Genre", b =>
+            modelBuilder.Entity("WebBookShopAPI.Data.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("WebBookShopAPI.Data.Models.CategoryGenre", "CategoryGenre")
-                        .WithMany("Genre")
-                        .HasForeignKey("CategoryGenreId")
+                    b.HasOne("WebBookShopAPI.Data.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CategoryGenre");
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.BookSeries", b =>
                 {
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.CategoryGenre", b =>
-                {
-                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Publisher", b =>

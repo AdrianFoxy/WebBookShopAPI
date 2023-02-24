@@ -50,7 +50,7 @@ namespace WebBookShopAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CategoryGenre",
+                name: "Genre",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -60,7 +60,7 @@ namespace WebBookShopAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryGenre", x => x.Id);
+                    table.PrimaryKey("PK_Genre", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -80,24 +80,21 @@ namespace WebBookShopAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Genre",
+                name: "SelectionOfBooks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CategoryGenreId = table.Column<int>(type: "int", nullable: false)
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ImageURL = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genre", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Genre_CategoryGenre_CategoryGenreId",
-                        column: x => x.CategoryGenreId,
-                        principalTable: "CategoryGenre",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_SelectionOfBooks", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -117,6 +114,7 @@ namespace WebBookShopAPI.Migrations
                     ImageURL = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Amount = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "float", nullable: false),
                     ReleaseYear = table.Column<int>(type: "int", nullable: false),
                     UploadDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BookSeriesId = table.Column<int>(type: "int", nullable: false),
@@ -190,6 +188,31 @@ namespace WebBookShopAPI.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "BookSelectionOfBooks",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    SelectionOfBooksId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookSelectionOfBooks", x => new { x.BookId, x.SelectionOfBooksId });
+                    table.ForeignKey(
+                        name: "FK_BookSelectionOfBooks_Book_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Book",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookSelectionOfBooks_SelectionOfBooks_SelectionOfBooksId",
+                        column: x => x.SelectionOfBooksId,
+                        principalTable: "SelectionOfBooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AuthorBook_BookId",
                 table: "AuthorBook",
@@ -211,9 +234,9 @@ namespace WebBookShopAPI.Migrations
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Genre_CategoryGenreId",
-                table: "Genre",
-                column: "CategoryGenreId");
+                name: "IX_BookSelectionOfBooks_SelectionOfBooksId",
+                table: "BookSelectionOfBooks",
+                column: "SelectionOfBooksId");
         }
 
         /// <inheritdoc />
@@ -226,22 +249,25 @@ namespace WebBookShopAPI.Migrations
                 name: "BookGenre");
 
             migrationBuilder.DropTable(
+                name: "BookSelectionOfBooks");
+
+            migrationBuilder.DropTable(
                 name: "Author");
+
+            migrationBuilder.DropTable(
+                name: "Genre");
 
             migrationBuilder.DropTable(
                 name: "Book");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "SelectionOfBooks");
 
             migrationBuilder.DropTable(
                 name: "BookSeries");
 
             migrationBuilder.DropTable(
                 name: "Publisher");
-
-            migrationBuilder.DropTable(
-                name: "CategoryGenre");
         }
     }
 }

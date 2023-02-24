@@ -22,23 +22,21 @@ namespace WebBookShopAPI.Controllers
         private readonly IGenericRepository<Book> _bookRepository;
         private readonly IGenericRepository<Genre> _genreRepository;
         private readonly IGenericRepository<Author> _authorRepository;
-        private readonly IGenericRepository<CategoryGenre> _categorygenreRepository;
         private readonly IMapper _mapper;
 
         public BookController(IGenericRepository<Book> booksRepo, IGenericRepository<Genre> genreRepo, IGenericRepository<Author> authorRepo,
-            IGenericRepository<CategoryGenre> categorygenreRepository, IMapper mapper) 
+            IMapper mapper)
         {
             _bookRepository = booksRepo;
             _genreRepository = genreRepo;
-            _authorRepository= authorRepo;
-            _categorygenreRepository = categorygenreRepository;
+            _authorRepository = authorRepo;
             _mapper = mapper;
 
         }
 
 
         [HttpGet("catalog_books")]
-        public async Task<ActionResult<Pagination<BookInCatalogDto>>> GetAllBooksCatalog([FromQuery]BookSpecParams bookParams)
+        public async Task<ActionResult<Pagination<BookInCatalogDto>>> GetAllBooksCatalog([FromQuery] BookSpecParams bookParams)
         {
 
             var spec = new BookWithAllInfoSpecification(bookParams);
@@ -59,15 +57,24 @@ namespace WebBookShopAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)] // ProducesResponseType показывает вариант ответов в свагере
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<BookInCatalogDto>> GetBookById(int id)
+        public async Task<ActionResult<SingleBookDto>> GetBookById(int id)
         {
             var spec = new BookWithAllInfoSpecification(id);
 
             var response = await _bookRepository.GetEntityWithSpec(spec);
 
             if (response == null) return NotFound(new ApiResponse(404));
-            //return Ok(_mapper.Map<Book, BookInCatalogDto>(response));
-            return Ok(response);
+            return Ok(_mapper.Map<Book, SingleBookDto>(response));
+        }
+
+        [HttpGet("get-by-id/{id}")]
+        public async Task<ActionResult<BookInShopCartDto>> GetBookForSPById(int id){
+            var spec = new BookWithAllInfoSpecification(id);
+
+            var response = await _bookRepository.GetEntityWithSpec(spec);
+
+            if (response == null) return NotFound(new ApiResponse(404));
+            return Ok(_mapper.Map<Book, BookInShopCartDto>(response));
         }
 
         [HttpGet("genres")]
@@ -81,13 +88,6 @@ namespace WebBookShopAPI.Controllers
         public async Task<IActionResult> GetAllAuthors()
         {
             var response = await _authorRepository.GetAllAsync();
-            return Ok(response);
-        }
-
-        [HttpGet("categoryGenres")]
-        public async Task<IActionResult> GetAllCategoryGenres()
-        {
-            var response = await _categorygenreRepository.GetAllAsync();
             return Ok(response);
         }
 

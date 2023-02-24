@@ -17,6 +17,7 @@ namespace WebBookShopAPI.Data
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Author> Author { get; set; }
         public DbSet<BookSeries> BookSeries { get; set; }
-        public DbSet<CategoryGenre> CategoryGenre { get; set; }
+        public DbSet<SelectionOfBooks> SelectionOfBooks { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItem { get; set; }
     }
 }

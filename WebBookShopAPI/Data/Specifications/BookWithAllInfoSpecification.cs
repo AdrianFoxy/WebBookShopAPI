@@ -23,6 +23,7 @@ namespace WebBookShopAPI.Data.Specifications
                 (bookParams.ExceptPublishersId == null || !bookParams.ExceptPublishersId.Contains(x.PublisherId))
             )
         {
+
             AddInclude(x => x.Publisher);
             AddInclude(x => x.BookSeries);
             AddInclude(x => x.Author);

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebBookShopAPI.Data;
+using WebBookShopAPI.Data.Cart;
 using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Middleware;
 using WebBookShopAPI.Data.Repositories;
@@ -25,6 +26,22 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Repository services
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+
+// ShoppingCart services
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options => {
+    options.Cookie.Name = "Card";
+    options.IdleTimeout = TimeSpan.FromMinutes(3600);
+    options.Cookie.HttpOnly = false; 
+    options.Cookie.IsEssential = true; 
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+
+});
+
 // Another services
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -70,6 +87,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles(); // With this I can use wwwroot
+app.UseSession();
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
