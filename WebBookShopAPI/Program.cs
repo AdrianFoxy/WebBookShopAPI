@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using WebBookShopAPI.Data;
-using WebBookShopAPI.Data.Cart;
 using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Middleware;
 using WebBookShopAPI.Data.Repositories;
@@ -21,15 +21,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
+{
+    var options = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
+    return ConnectionMultiplexer.Connect(options);
+});
 
 
 // Repository services
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 // ShoppingCart services
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {

@@ -44,3 +44,5 @@ E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\obj\Debug\net7.0\W
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\obj\Debug\net7.0\ref\WebBookShopAPI.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\AutoMapper.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Pipelines.Sockets.Unofficial.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\StackExchange.Redis.dll

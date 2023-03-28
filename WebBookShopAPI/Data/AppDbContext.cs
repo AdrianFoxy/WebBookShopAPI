@@ -18,6 +18,5 @@ namespace WebBookShopAPI.Data
         public DbSet<Author> Author { get; set; }
         public DbSet<BookSeries> BookSeries { get; set; }
         public DbSet<SelectionOfBooks> SelectionOfBooks { get; set; }
-        public DbSet<ShoppingCartItem> ShoppingCartItem { get; set; }
     }
 }

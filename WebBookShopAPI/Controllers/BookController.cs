@@ -67,16 +67,6 @@ namespace WebBookShopAPI.Controllers
             return Ok(_mapper.Map<Book, SingleBookDto>(response));
         }
 
-        [HttpGet("get-by-id/{id}")]
-        public async Task<ActionResult<BookInShopCartDto>> GetBookForSPById(int id){
-            var spec = new BookWithAllInfoSpecification(id);
-
-            var response = await _bookRepository.GetEntityWithSpec(spec);
-
-            if (response == null) return NotFound(new ApiResponse(404));
-            return Ok(_mapper.Map<Book, BookInShopCartDto>(response));
-        }
-
         [HttpGet("genres")]
         public async Task<IActionResult> GetAllGenres()
         {

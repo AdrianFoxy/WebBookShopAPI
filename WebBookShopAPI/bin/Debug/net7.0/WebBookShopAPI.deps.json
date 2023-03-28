@@ -14,6 +14,7 @@
           "Microsoft.EntityFrameworkCore.Design": "7.0.2",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.2",
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
+          "StackExchange.Redis": "2.6.96",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -199,6 +200,17 @@
           }
         }
       },
+      "Pipelines.Sockets.Unofficial/2.2.2": {
+        "dependencies": {
+          "System.IO.Pipelines": "5.0.1"
+        },
+        "runtime": {
+          "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "2.2.2.34088"
+          }
+        }
+      },
       "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
@@ -208,6 +220,17 @@
           "lib/net7.0/Pomelo.EntityFrameworkCore.MySql.dll": {
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.0.0.0"
+          }
+        }
+      },
+      "StackExchange.Redis/2.6.96": {
+        "dependencies": {
+          "Pipelines.Sockets.Unofficial": "2.2.2"
+        },
+        "runtime": {
+          "lib/net5.0/StackExchange.Redis.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.6.96.30123"
           }
         }
       },
@@ -257,6 +280,7 @@
           }
         }
       },
+      "System.IO.Pipelines/5.0.1": {},
       "System.Text.Encodings.Web/7.0.0": {},
       "System.Text.Json/7.0.0": {
         "dependencies": {
@@ -446,12 +470,26 @@
       "path": "mysqlconnector/2.2.5",
       "hashPath": "mysqlconnector.2.2.5.nupkg.sha512"
     },
+    "Pipelines.Sockets.Unofficial/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bhk0FWxH1paI+18zr1g5cTL+ebeuDcBCR+rRFO+fKEhretgjs7MF2Mc1P64FGLecWp4zKCUOPzngBNrqVyY7Zg==",
+      "path": "pipelines.sockets.unofficial/2.2.2",
+      "hashPath": "pipelines.sockets.unofficial.2.2.2.nupkg.sha512"
+    },
     "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-Qk5WB/skSZet5Yrz6AN2ywjZaB1pxfAmvQ+5I4khTkLwwIamI4QJoH2NphCWLFQL+2ar8HvsNCTmwYk0qhqL0w==",
       "path": "pomelo.entityframeworkcore.mysql/7.0.0",
       "hashPath": "pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512"
+    },
+    "StackExchange.Redis/2.6.96": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JDj94bTwBZ6zA1vknEYJppRXRejTnl5u2z6cRBQ0DJ+Uy94qvn0XsQZ2M+1/VkqtxQ+LUU1h4JZWwcvVojGiQg==",
+      "path": "stackexchange.redis/2.6.96",
+      "hashPath": "stackexchange.redis.2.6.96.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.4.0": {
       "type": "package",
@@ -487,6 +525,13 @@
       "sha512": "sha512-2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "path": "system.codedom/4.4.0",
       "hashPath": "system.codedom.4.4.0.nupkg.sha512"
+    },
+    "System.IO.Pipelines/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qEePWsaq9LoEEIqhbGe6D5J8c9IqQOUuTzzV6wn1POlfdLkJliZY3OlB0j0f17uMWlqZYjH7txj+2YbyrIA8Yg==",
+      "path": "system.io.pipelines/5.0.1",
+      "hashPath": "system.io.pipelines.5.0.1.nupkg.sha512"
     },
     "System.Text.Encodings.Web/7.0.0": {
       "type": "package",
