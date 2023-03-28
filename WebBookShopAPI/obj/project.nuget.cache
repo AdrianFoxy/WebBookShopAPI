@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "wYz+bSVEl9cTHgU6AOdLz4fr8/wnxbdebHUMGKyG9VXzNe4rKxgSmesnMrfJEBq6U7HTw7F0dsHEfouOYGmFzQ==",
+=======
+  "dgSpecHash": "VXjpU3fYBQR7ldmsyTH3OThtGrJ/+qBLZgnjeKytDUM1vxgQcxV7YldIvwH3l3m/hx8gQVWH2gsc0Frj//rdMA==",
+>>>>>>> b9f477857290307470aedc520de7fa3f3359b2d9
   "success": true,
   "projectFilePath": "E:\\prog work\\WebBookShopProject\\WebBookShopAPI\\WebBookShopAPI\\WebBookShopAPI.csproj",
   "expectedPackageFiles": [
