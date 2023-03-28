@@ -17,11 +17,12 @@ namespace WebBookShopAPI.Data.Helpers
                 .ForMember(d => d.ImageURL, o => o.MapFrom<BookUrlResolver<SingleBookDto>>());
 
             CreateMap<ShoppingCartItem, ShoppingCartItemDto>()
-                .ForMember(dest => dest.BookInShopCartDto, opt => opt.MapFrom(src => src.Book));
+                 .ForMember(dest => dest.BookInShopCartDto, opt => opt.MapFrom(src => src.Book));
 
             CreateMap<Book, BookInShopCartDto>()
                 .ForMember(d => d.Authors, o => o.MapFrom(s => s.Author.Select(n => n.FullName)))
                 .ForMember(d => d.ImageURL, o => o.MapFrom<BookUrlResolver<BookInShopCartDto>>());
+
 
         }
     }

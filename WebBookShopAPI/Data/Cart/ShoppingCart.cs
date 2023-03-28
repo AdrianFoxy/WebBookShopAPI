@@ -17,12 +17,10 @@ namespace WebBookShopAPI.Data.Cart
 
         public static ShoppingCart GetShoppingCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session; // if not null
+            var httpContextAccessor = services.GetService<IHttpContextAccessor>();
             var context = services.GetService<AppDbContext>();
-
-            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-            session.SetString("CartId", cartId);
-
+            string cartId = httpContextAccessor.HttpContext.Request.Cookies["CartId"] ?? Guid.NewGuid().ToString();
+            httpContextAccessor.HttpContext.Response.Cookies.Append("CartId", cartId, new CookieOptions { Expires = DateTime.Now.AddDays(7) });
 
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }

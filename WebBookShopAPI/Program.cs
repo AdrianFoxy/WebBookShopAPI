@@ -35,7 +35,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
     options.Cookie.Name = "Card";
     options.IdleTimeout = TimeSpan.FromMinutes(3600);
-    options.Cookie.HttpOnly = false; 
+    options.Cookie.HttpOnly = false;
     options.Cookie.IsEssential = true; 
     options.Cookie.SameSite = SameSiteMode.None;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;

@@ -1,6 +1,4 @@
-﻿using WebBookShopAPI.Data.Models;
-
-namespace WebBookShopAPI.Data.Dtos
+﻿namespace WebBookShopAPI.Data.Dtos
 {
     public class BookInShopCartDto
     {
