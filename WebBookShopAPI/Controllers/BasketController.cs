@@ -24,7 +24,7 @@ namespace WebBookShopAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket([FromQuery] CustomerBasket basket)
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
         {
             var updateBasket = await _basketRepository.UpdateBasketAsync(basket);
             return Ok(updateBasket);
