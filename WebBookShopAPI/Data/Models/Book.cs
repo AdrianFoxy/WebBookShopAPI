@@ -14,13 +14,12 @@ namespace WebBookShopAPI.Data.Models
         public int Amount { get; set; }
         public float Price { get; set; }
         public int ReleaseYear { get; set; }
-        public DateTime UploadDate { get; set; }
+        public float Rating { get; set; }
         public int BookSeriesId { get; set; }
         [ForeignKey("BookSeriesId")]
         public BookSeries BookSeries { get; set; }
         public int PublisherId { get; set; }
         [ForeignKey("PublisherId")]
-
         public Publisher Publisher { get; set; }
         public List<Author> Author { get; set; }
         public List<Genre> Genre { get; set; }

@@ -14,7 +14,8 @@ namespace WebBookShopAPI.Data.Dtos
         public int Amount { get; set; }
         public float Price { get; set; }
         public int ReleaseYear { get; set; }
-        public DateTime UploadDate { get; set; }
+        public DateTime UploadedInfo { get; set; }
+        public DateTime UpdatedInfo { get; set; }
         public BookSeries BookSeries { get; set; }
         public Publisher Publisher { get; set; }
         public List<Author> Author { get; set; }

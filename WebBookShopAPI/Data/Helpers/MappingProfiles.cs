@@ -9,7 +9,6 @@ namespace WebBookShopAPI.Data.Helpers
         public MappingProfiles() 
         {
             CreateMap<Book, BookInCatalogDto>()
-                .ForMember(d => d.BookSeries, o => o.MapFrom(s => s.BookSeries.Name))
                 .ForMember(d => d.Authors, o => o.MapFrom(s => s.Author.Select(n => n.FullName)))
                 .ForMember(d => d.ImageURL, o=> o.MapFrom<BookUrlResolver<BookInCatalogDto>>());
 

@@ -9,6 +9,73 @@ namespace WebBookShopAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Default Values
+            {
+                modelBuilder.Entity<Author>()
+                     .Property(b => b.UploadedInfo)
+                     .ValueGeneratedOnAdd()
+                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Author>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Genre>()
+                     .Property(b => b.UploadedInfo)
+                     .ValueGeneratedOnAdd()
+                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Genre>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<BookSeries>()
+                     .Property(b => b.UploadedInfo)
+                     .ValueGeneratedOnAdd()
+                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<BookSeries>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<SelectionOfBooks>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<SelectionOfBooks>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Book>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Book>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Book>()
+                     .Property(b => b.Rating)
+                     .ValueGeneratedOnAddOrUpdate()
+                     .HasDefaultValueSql("0");
+
+                modelBuilder.Entity<Publisher>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Publisher>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            }
 
         }
 
