@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WebBookShopAPI.Data.Models;
+using WebBookShopAPI.Data.Models.Identity;
 
 namespace WebBookShopAPI.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -77,6 +79,7 @@ namespace WebBookShopAPI.Data
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
             }
 
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Book> Book { get; set; }

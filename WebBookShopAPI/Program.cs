@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using WebBookShopAPI.Data;
 using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Middleware;
+using WebBookShopAPI.Data.Models.Identity;
 using WebBookShopAPI.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,18 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
     var options = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
     return ConnectionMultiplexer.Connect(options);
 });
+
+
+// Identity Service
+builder.Services.AddIdentityCore<AppUser>(opt =>
+{
+    // add identity options here
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddSignInManager<SignInManager<AppUser>>();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 
 // Repository services
@@ -94,8 +108,27 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(); // With this I can use wwwroot
 app.UseSession();
 app.UseCors("CorsPolicy");
+
+// connection order is important, UseAuthentication always before UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var context = services.GetRequiredService<AppDbContext>();
+var userManager = services.GetRequiredService<UserManager<AppUser>>();
+var logger = services.GetRequiredService<ILogger<Program>>();
+try
+{
+    await context.Database.MigrateAsync();
+    await AppDbContextSeed.SeedUsersAsync(userManager);
+}
+catch(Exception ex)
+{
+    logger.LogError(ex, "An error occured during migration");
+}
+
 
 app.Run();
