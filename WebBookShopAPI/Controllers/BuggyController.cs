@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebBookShopAPI.Data;
 using WebBookShopAPI.Data.Errors;
@@ -13,6 +14,14 @@ namespace WebBookShopAPI.Controllers
         public BuggyController(AppDbContext context) 
         { 
             _context = context;
+        }
+
+
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
         }
 
         [HttpGet("notfound")]

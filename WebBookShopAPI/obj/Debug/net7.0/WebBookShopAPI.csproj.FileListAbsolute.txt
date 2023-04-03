@@ -58,3 +58,6 @@ E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\M
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\System.Security.Permissions.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
