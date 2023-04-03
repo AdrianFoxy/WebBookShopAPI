@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Specifications;
 

@@ -3,8 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models.Identity;
-using WebBookShopAPI.Data.Repositories;
 
 namespace WebBookShopAPI.Data.Services
 {

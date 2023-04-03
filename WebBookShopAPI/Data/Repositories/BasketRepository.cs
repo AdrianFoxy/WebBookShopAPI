@@ -1,5 +1,6 @@
 ﻿using StackExchange.Redis;
 using System.Text.Json;
+using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
 
 namespace WebBookShopAPI.Data.Repositories

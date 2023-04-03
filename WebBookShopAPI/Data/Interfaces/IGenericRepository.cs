@@ -1,9 +1,9 @@
 ﻿using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Specifications;
 
-namespace WebBookShopAPI.Data.Repositories
+namespace WebBookShopAPI.Data.Interfaces
 {
-    public interface IGenericRepository<T> where T: BaseEntity
+    public interface IGenericRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> GetAllAsync();

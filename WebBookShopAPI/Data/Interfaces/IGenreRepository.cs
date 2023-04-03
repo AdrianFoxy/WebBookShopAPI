@@ -1,6 +1,6 @@
 ﻿using WebBookShopAPI.Data.Models;
 
-namespace WebBookShopAPI.Data.Repositories
+namespace WebBookShopAPI.Data.Interfaces
 {
     public interface IGenreRepository
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebBookShopAPI.Data.Repositories;
+using WebBookShopAPI.Data.Interfaces;
 
 namespace WebBookShopAPI.Controllers
 {

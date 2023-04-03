@@ -6,8 +6,8 @@ using StackExchange.Redis;
 using System.Security.Claims;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
+using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models.Identity;
-using WebBookShopAPI.Data.Repositories;
 
 namespace WebBookShopAPI.Controllers
 {

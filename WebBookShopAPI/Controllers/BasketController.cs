@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
-using WebBookShopAPI.Data.Repositories;
 
 namespace WebBookShopAPI.Controllers
 {
