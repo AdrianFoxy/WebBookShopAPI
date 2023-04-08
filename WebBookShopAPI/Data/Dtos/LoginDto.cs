@@ -1,8 +1,12 @@
-﻿namespace WebBookShopAPI.Data.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebBookShopAPI.Data.Dtos
 {
     public class LoginDto
     {
+        [Required]    
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }

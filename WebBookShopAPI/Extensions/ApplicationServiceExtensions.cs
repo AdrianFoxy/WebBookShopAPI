@@ -56,7 +56,7 @@ namespace WebBookShopAPI.Extensions
                     .SelectMany(x => x.Value.Errors)
                     .Select(x => x.ErrorMessage).ToArray();
 
-                    var errorResponse = new ApiValidationErrorResponsecs
+                    var errorResponse = new ApiValidationErrorResponse
                     {
                         Errors = errors
                     };

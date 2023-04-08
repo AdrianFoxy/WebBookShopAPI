@@ -1,8 +1,8 @@
 ﻿namespace WebBookShopAPI.Data.Errors
 {
-    public class ApiValidationErrorResponsecs : ApiResponse
+    public class ApiValidationErrorResponse : ApiResponse
     {
-        public ApiValidationErrorResponsecs() : base(400)
+        public ApiValidationErrorResponse() : base(400)
         {
         }
 

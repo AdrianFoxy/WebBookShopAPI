@@ -14,6 +14,8 @@ namespace WebBookShopAPI.Data.Helpers
 
             CreateMap<Book, SingleBookDto>()
                 .ForMember(d => d.ImageURL, o => o.MapFrom<BookUrlResolver<SingleBookDto>>());
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
 
         }
     }
