@@ -40,8 +40,10 @@ namespace WebBookShopAPI.Controllers
                 Token = await _tokenService.CreateToken(user),
                 FullName = user.FullName,
                 DateOfBirth = user.DateOfBirth,
-                Role = User.FindFirstValue(ClaimTypes.Role)
-        };
+                Role = User.FindFirstValue(ClaimTypes.Role),
+                PhoneNumber = user.PhoneNumber,
+                UserGenderCode = user.UserGenderCode
+            };
         }
 
         [HttpGet("emailexists")]
@@ -72,7 +74,10 @@ namespace WebBookShopAPI.Controllers
                 Token = token,
                 FullName = user.FullName,
                 DateOfBirth = user.DateOfBirth,
-                Role = roleString
+                Role = roleString,
+                PhoneNumber = user.PhoneNumber,
+                UserGenderCode = user.UserGenderCode
+
             };
         }
 
@@ -84,7 +89,9 @@ namespace WebBookShopAPI.Controllers
                 Email = registerDto.Email,
                 FullName = registerDto.FullName,
                 DateOfBirth = registerDto.DateOfBirth,
-                UserName = registerDto.Email
+                UserName = registerDto.Email,
+                PhoneNumber = registerDto.PhoneNumber,
+                UserGenderCode = registerDto.UserGenderCode
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -101,7 +108,9 @@ namespace WebBookShopAPI.Controllers
                 Token = await _tokenService.CreateToken(user),
                 FullName = user.FullName,
                 DateOfBirth = user.DateOfBirth,
-                Role = roleString
+                Role = roleString,
+                PhoneNumber = user.PhoneNumber,
+                UserGenderCode = user.UserGenderCode
             };
         }
     }

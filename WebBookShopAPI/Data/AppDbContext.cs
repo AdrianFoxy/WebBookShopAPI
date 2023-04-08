@@ -79,6 +79,17 @@ namespace WebBookShopAPI.Data
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
             }
 
+            // Gender For User
+            {
+                modelBuilder.Entity<Gender>()
+                   .HasKey(g => g.GenderCode);
+
+                modelBuilder.Entity<AppUser>()
+                    .HasOne(a => a.Gender)
+                    .WithMany()
+                    .HasForeignKey(a => a.UserGenderCode);
+            }
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -88,5 +99,6 @@ namespace WebBookShopAPI.Data
         public DbSet<Author> Author { get; set; }
         public DbSet<BookSeries> BookSeries { get; set; }
         public DbSet<SelectionOfBooks> SelectionOfBooks { get; set; }
+        public DbSet<Gender> Gender { get; set; }
     }
 }

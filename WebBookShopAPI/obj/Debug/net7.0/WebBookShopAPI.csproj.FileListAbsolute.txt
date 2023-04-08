@@ -61,3 +61,4 @@ E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\S
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
 E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\prog work\WebBookShopProject\WebBookShopAPI\WebBookShopAPI\bin\Debug\net7.0\appsettings.Database.json

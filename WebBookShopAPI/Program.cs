@@ -1,18 +1,8 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
-using System.Text;
 using WebBookShopAPI.Data;
-using WebBookShopAPI.Data.Errors;
-using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Middleware;
 using WebBookShopAPI.Data.Models.Identity;
-using WebBookShopAPI.Data.Repositories;
-using WebBookShopAPI.Data.Services;
 using WebBookShopAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
