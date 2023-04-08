@@ -24,6 +24,13 @@ namespace WebBookShopAPI.Controllers
             return "secret stuff";
         }
 
+        [HttpGet("testauth_admin")]
+        [Authorize(Roles = "Admin")]     
+        public ActionResult<string> GetAdminSecretText()
+        {
+            return "admin secret stuff";
+        }
+
         [HttpGet("notfound")]
         public ActionResult GetNotFoundRequest() 
         {
