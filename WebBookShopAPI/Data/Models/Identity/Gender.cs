@@ -1,4 +1,6 @@
-﻿namespace WebBookShopAPI.Data.Models.Identity
+﻿using System.Runtime.Serialization;
+
+namespace WebBookShopAPI.Data.Models.Identity
 {
     public class Gender
     {

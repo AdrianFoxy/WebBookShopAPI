@@ -1,4 +1,6 @@
-﻿namespace WebBookShopAPI.Data.Dtos
+﻿using WebBookShopAPI.Data.Models.Identity;
+
+namespace WebBookShopAPI.Data.Dtos
 {
     public class UserDto
     {

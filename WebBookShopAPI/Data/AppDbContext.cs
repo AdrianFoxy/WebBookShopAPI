@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Models.Identity;
+using WebBookShopAPI.Data.Models.OrderEntities;
 
 namespace WebBookShopAPI.Data
 {
@@ -77,6 +78,73 @@ namespace WebBookShopAPI.Data
                     .Property(b => b.UpdatedInfo)
                     .ValueGeneratedOnAddOrUpdate()
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Order>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Order>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Delivery>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Delivery>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<OrderStatus>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<OrderStatus>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            }
+
+            // Fields
+            {
+                modelBuilder.Entity<Book>(entity =>
+                {
+                    entity.Property(e => e.Price)
+                        .HasColumnType("decimal(18,2)");
+                });
+
+                modelBuilder.Entity<Order>(entity =>
+                {
+                    entity.Property(e => e.Sum)
+                        .HasColumnType("decimal(18,2)");
+                });
+
+                modelBuilder.Entity<Delivery>(entity =>
+                {
+                    entity.Property(e => e.Price)
+                        .HasColumnType("decimal(18,2)");
+                });
+
+            }
+
+            // OrderItem
+            {
+                modelBuilder.Entity<OrderItem>().HasKey(am => new
+                {
+                    am.BookId,
+                    am.OrderId
+                });
+
+                modelBuilder.Entity<OrderItem>().HasOne(m => m.Book).WithMany(am => am.OrderItem).HasForeignKey(m =>
+                m.BookId);
+
+                modelBuilder.Entity<OrderItem>().HasOne(m => m.Order).WithMany(am => am.OrderItem).HasForeignKey(m =>
+                m.OrderId);
             }
 
             // Gender For User
@@ -99,6 +167,10 @@ namespace WebBookShopAPI.Data
         public DbSet<Author> Author { get; set; }
         public DbSet<BookSeries> BookSeries { get; set; }
         public DbSet<SelectionOfBooks> SelectionOfBooks { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<Gender> Gender { get; set; }
+
     }
 }

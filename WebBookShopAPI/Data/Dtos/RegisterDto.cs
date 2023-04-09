@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebBookShopAPI.Data.Models.Identity;
 
 namespace WebBookShopAPI.Data.Dtos
 {

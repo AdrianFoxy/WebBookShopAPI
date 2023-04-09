@@ -25,7 +25,7 @@ namespace WebBookShopAPI.Data
                     UserName = "user@gmail.com",
                     DateOfBirth = new DateTime(2001, 11, 27),
                     PhoneNumber = "1234567890",
-                    UserGenderCode = "M"
+                    UserGenderCode = "F"
 
                 };
 
@@ -39,7 +39,7 @@ namespace WebBookShopAPI.Data
                     UserName = "userF@gmail.com",
                     DateOfBirth = new DateTime(2001, 11, 27),
                     PhoneNumber = "1234567890",
-                    UserGenderCode = "F"
+                    UserGenderCode = "M"
 
                 };
 

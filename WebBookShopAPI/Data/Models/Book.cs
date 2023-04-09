@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using WebBookShopAPI.Data.Models.OrderEntities;
 
 namespace WebBookShopAPI.Data.Models
 {
@@ -12,7 +13,7 @@ namespace WebBookShopAPI.Data.Models
         public string Format { get; set; } = string.Empty;
         public string ImageURL { get; set; } = string.Empty;
         public int Amount { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public int ReleaseYear { get; set; }
         public float Rating { get; set; }
         public int BookSeriesId { get; set; }
@@ -24,5 +25,7 @@ namespace WebBookShopAPI.Data.Models
         public List<Author> Author { get; set; }
         public List<Genre> Genre { get; set; }
         public List<SelectionOfBooks> SelectionOfBooks { get; set; }
+        public List<OrderItem> OrderItem { get; set; }
+
     }
 }

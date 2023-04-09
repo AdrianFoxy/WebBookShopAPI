@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBookShopAPI.Data;
 
@@ -10,9 +11,11 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230409103857_OrderUp")]
+    partial class OrderUp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -448,14 +451,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.HasKey("Id");
 
@@ -493,14 +492,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -509,8 +504,6 @@ namespace WebBookShopAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("DeliveryId");
 
                     b.HasIndex("OrderStatusId");
 
@@ -546,14 +539,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.HasKey("Id");
 
@@ -750,12 +739,6 @@ namespace WebBookShopAPI.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("WebBookShopAPI.Data.Models.OrderEntities.Delivery", null)
-                        .WithMany("Order")
-                        .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebBookShopAPI.Data.Models.OrderEntities.OrderStatus", "OrderStatus")
                         .WithMany("Order")
                         .HasForeignKey("OrderStatusId")
@@ -794,11 +777,6 @@ namespace WebBookShopAPI.Migrations
             modelBuilder.Entity("WebBookShopAPI.Data.Models.BookSeries", b =>
                 {
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.OrderEntities.Delivery", b =>
-                {
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.OrderEntities.Order", b =>

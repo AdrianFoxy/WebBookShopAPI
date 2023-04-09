@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WebBookShopAPI.Data.Models.OrderEntities;
 
 namespace WebBookShopAPI.Data.Models.Identity
 {
@@ -8,5 +9,6 @@ namespace WebBookShopAPI.Data.Models.Identity
         public DateTime DateOfBirth { get; set; }
         public string UserGenderCode { get; set; }
         public Gender Gender { get; set; }
+
     }
 }

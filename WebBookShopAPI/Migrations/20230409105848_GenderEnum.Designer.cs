@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBookShopAPI.Data;
 
@@ -10,9 +11,11 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230409105848_GenderEnum")]
+    partial class GenderEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -365,6 +368,9 @@ namespace WebBookShopAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("GenderCode")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -394,10 +400,6 @@ namespace WebBookShopAPI.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("UserGenderCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -411,23 +413,7 @@ namespace WebBookShopAPI.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("UserGenderCode");
-
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.Identity.Gender", b =>
-                {
-                    b.Property<string>("GenderCode")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("GenderCode");
-
-                    b.ToTable("Gender");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.OrderEntities.Delivery", b =>
@@ -448,14 +434,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.HasKey("Id");
 
@@ -493,14 +475,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -546,14 +524,10 @@ namespace WebBookShopAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedInfo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.Property<DateTime>("UploadedInfo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DateTime")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("DateTime");
 
                     b.HasKey("Id");
 
@@ -731,17 +705,6 @@ namespace WebBookShopAPI.Migrations
                     b.Navigation("BookSeries");
 
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.Identity.AppUser", b =>
-                {
-                    b.HasOne("WebBookShopAPI.Data.Models.Identity.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("UserGenderCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gender");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.OrderEntities.Order", b =>
