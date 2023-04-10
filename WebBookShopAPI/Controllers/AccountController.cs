@@ -36,6 +36,7 @@ namespace WebBookShopAPI.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
                 FullName = user.FullName,
@@ -70,6 +71,7 @@ namespace WebBookShopAPI.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 Token = token,
                 FullName = user.FullName,
@@ -111,6 +113,7 @@ namespace WebBookShopAPI.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
                 FullName = user.FullName,

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBookShopAPI.Data;
 
@@ -10,9 +11,11 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230410052039_OrderItem")]
+    partial class OrderItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -470,9 +473,7 @@ namespace WebBookShopAPI.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("longtext")
-                        .HasDefaultValueSql("проспект Людвіга Свободи, 33, Харків, Харківська область, 61000");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("varchar(255)");

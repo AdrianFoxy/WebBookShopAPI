@@ -108,6 +108,16 @@ namespace WebBookShopAPI.Data
                     .Property(b => b.UpdatedInfo)
                     .ValueGeneratedOnAddOrUpdate()
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Order>()
+                     .Property(b => b.OrderStatusId)
+                     .ValueGeneratedOnAddOrUpdate()
+                     .HasDefaultValueSql("1");
+
+                modelBuilder.Entity<Order>()
+                     .Property(b => b.Address)
+                     .ValueGeneratedOnAddOrUpdate()
+                     .HasDefaultValueSql("проспект Людвіга Свободи, 33, Харків, Харківська область, 61000");
             }
 
             // Fields
@@ -138,6 +148,12 @@ namespace WebBookShopAPI.Data
                 {
                     am.BookId,
                     am.OrderId
+                });
+
+                modelBuilder.Entity<OrderItem>(entity =>
+                {
+                    entity.Property(e => e.Price)
+                        .HasColumnType("decimal(18,2)");
                 });
 
                 modelBuilder.Entity<OrderItem>().HasOne(m => m.Book).WithMany(am => am.OrderItem).HasForeignKey(m =>

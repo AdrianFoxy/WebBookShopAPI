@@ -36,6 +36,7 @@ namespace WebBookShopAPI.Extensions
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             // ShoppingCart services
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
