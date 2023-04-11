@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebBookShopAPI.Data.Specifications;
+using WebBookShopAPI.Data.Interfaces;
 
 namespace WebBookShopAPI.Data.Models
 {
@@ -35,6 +35,7 @@ namespace WebBookShopAPI.Data.Models
             }
 
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+
 
             return query;
         }

@@ -8,6 +8,7 @@ using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models.Identity;
+using WebBookShopAPI.Extensions;
 
 namespace WebBookShopAPI.Controllers
 {
@@ -30,7 +31,7 @@ namespace WebBookShopAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
+            var email = User.RetrieveEmailFromPrincipal();
 
             var user = await _userManager.FindByEmailAsync(email);
 
@@ -41,7 +42,7 @@ namespace WebBookShopAPI.Controllers
                 Token = await _tokenService.CreateToken(user),
                 FullName = user.FullName,
                 DateOfBirth = user.DateOfBirth,
-                Role = User.FindFirstValue(ClaimTypes.Role),
+                Role = User.RetrieveRoleFromPrincipal(),
                 PhoneNumber = user.PhoneNumber,
                 UserGenderCode = user.UserGenderCode
             };

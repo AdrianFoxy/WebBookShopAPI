@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Models;
+using WebBookShopAPI.Data.Models.OrderEntities;
 
 namespace WebBookShopAPI.Data.Helpers
 {
@@ -16,6 +17,13 @@ namespace WebBookShopAPI.Data.Helpers
                 .ForMember(d => d.ImageURL, o => o.MapFrom<BookUrlResolver<SingleBookDto>>());
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
+
+            CreateMap<Order, OrderToReturnDto>();
+            CreateMap<OrderStatus, OrderStatusDto>();
+            CreateMap<Delivery, DeliveryDto>();
+            CreateMap<OrderItem, OrderItemDto>();
+            CreateMap<Book, BookInOrderDto>()
+                .ForMember(d => d.ImageURL, o=>o.MapFrom<BookUrlResolver<BookInOrderDto>>());
 
         }
     }

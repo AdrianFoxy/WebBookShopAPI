@@ -1,5 +1,4 @@
 ﻿using WebBookShopAPI.Data.Models;
-using WebBookShopAPI.Data.Specifications;
 
 namespace WebBookShopAPI.Data.Interfaces
 {

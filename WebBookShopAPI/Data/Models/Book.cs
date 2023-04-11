@@ -25,6 +25,7 @@ namespace WebBookShopAPI.Data.Models
         public List<Author> Author { get; set; }
         public List<Genre> Genre { get; set; }
         public List<SelectionOfBooks> SelectionOfBooks { get; set; }
+        [JsonIgnore]
         public List<OrderItem> OrderItem { get; set; }
 
     }

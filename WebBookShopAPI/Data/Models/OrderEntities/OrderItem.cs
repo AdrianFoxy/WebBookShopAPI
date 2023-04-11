@@ -7,11 +7,6 @@ namespace WebBookShopAPI.Data.Models.OrderEntities
     {
         public OrderItem() { }
 
-        public OrderItem(int BookId, int OrderId, int Amount) {
-            this.BookId = BookId;
-            this.OrderId = OrderId;
-            this.Amount = Amount;
-        }
 
         public OrderItem(int BookId, int Amount, decimal price)
         {

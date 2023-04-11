@@ -115,9 +115,9 @@ namespace WebBookShopAPI.Data
                      .HasDefaultValueSql("1");
 
                 modelBuilder.Entity<Order>()
-                     .Property(b => b.Address)
-                     .ValueGeneratedOnAddOrUpdate()
-                     .HasDefaultValueSql("проспект Людвіга Свободи, 33, Харків, Харківська область, 61000");
+                    .Property(b => b.Address)
+                    .HasDefaultValue("проспект Людвіга Свободи, 33, Харків, Харківська область, 61000");
+
             }
 
             // Fields
@@ -184,6 +184,7 @@ namespace WebBookShopAPI.Data
         public DbSet<BookSeries> BookSeries { get; set; }
         public DbSet<SelectionOfBooks> SelectionOfBooks { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; } 
         public DbSet<Delivery> Delivery { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<Gender> Gender { get; set; }

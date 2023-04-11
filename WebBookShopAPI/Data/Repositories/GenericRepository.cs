@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
-using WebBookShopAPI.Data.Specifications;
 
 namespace WebBookShopAPI.Data.Repositories
 {
@@ -11,6 +10,22 @@ namespace WebBookShopAPI.Data.Repositories
         public GenericRepository(AppDbContext context) 
         {
             _context = context;
+        }
+
+        public void Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(T entity)
+        {
+           _context.Set<T>().Remove(entity);
         }
 
         public async Task<int> CountAsync(ISpecification<T> spec)
