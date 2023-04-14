@@ -26,7 +26,7 @@ namespace WebBookShopAPI.Data.Services
             _orderStatusRepo = orderStatusRepo;
         }
 
-        public async Task<Order> CreateOrderAsync(string ContactEmail, string ContactPhone, int deliveryId, string Address, string UserId, string basketId)
+        public async Task<Order> CreateOrderAsync(string ContactEmail, string ContactName, string ContactPhone, int deliveryId, string Address, string UserId, string basketId)
         {
             // get basket from the basket repo
             var basket = await _basketRepo.GetBasketAsync(basketId);
@@ -54,13 +54,13 @@ namespace WebBookShopAPI.Data.Services
             if (Address.Length <= 0) Address = "проспект Людвіга Свободи, 33, Харків, Харківська область, 61000";
 
             // create order
-            var order = new Order(items, ContactEmail, ContactPhone, Address, subtotal, deliveryId, UserId, orderStatus);
+            var order = new Order(items, ContactName, ContactEmail, ContactPhone, Address, subtotal, deliveryId, UserId, orderStatus);
 
             // save to db
             await _context.Order.AddAsync(order);
 
-                // delete basket
-                await _basketRepo.DeleteBasketAsync(basketId);
+            // delete basket
+            await _basketRepo.DeleteBasketAsync(basketId);
 
             await _context.SaveChangesAsync();
 
@@ -70,7 +70,6 @@ namespace WebBookShopAPI.Data.Services
 
         public async Task<Order> GetOrderByIdAsync(int OrderId, string UserId)
         {
-            var spec = new OrderWithItemsAndOrderingSpecification(OrderId, UserId);
 
             var order = await _context.Order
                 .Include(n => n.OrderItem)
@@ -85,7 +84,6 @@ namespace WebBookShopAPI.Data.Services
 
         public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string UserId)
         {
-            var spec = new OrderWithItemsAndOrderingSpecification(UserId);
 
             var orders = await _context.Order
                 .Include(n => n.OrderItem)
@@ -95,6 +93,12 @@ namespace WebBookShopAPI.Data.Services
                 .ToListAsync();
 
             return orders;
+        }
+
+        public async Task<IReadOnlyList<Delivery>> GetDeliveryMethodsAsync()
+        {
+            var delMethods = await _context.Delivery.ToListAsync();
+            return delMethods;
         }
     }
 }

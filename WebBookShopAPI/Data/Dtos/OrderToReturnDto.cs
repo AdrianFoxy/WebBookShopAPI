@@ -10,6 +10,7 @@ namespace WebBookShopAPI.Data.Dtos
         public DateTime UploadedInfo { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime UpdatedInfo { get; set; }
+        public string ContactName { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
         public string Address { get; set; }

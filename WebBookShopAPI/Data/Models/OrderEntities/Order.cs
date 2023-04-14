@@ -7,9 +7,10 @@ namespace WebBookShopAPI.Data.Models.OrderEntities
     public class Order : BaseEntity
     {
         public Order() { }
-        public Order(IReadOnlyList<OrderItem> OrderItems, string ContactEmail, string ContactPhone, string Address,
+        public Order(IReadOnlyList<OrderItem> OrderItems, string ContactName, string ContactEmail, string ContactPhone, string Address,
             decimal Sum, int DeliveryId, string UserId, OrderStatus OrderStatus) {
             this.OrderItem = OrderItems;
+            this.ContactName = ContactName;
             this.ContactEmail = ContactEmail;
             this.ContactPhone = ContactPhone;
             this.Address = Address;
@@ -18,6 +19,7 @@ namespace WebBookShopAPI.Data.Models.OrderEntities
             this.AppUserId = UserId;
             this.OrderStatus = OrderStatus;
         }
+        public string ContactName { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
         public string Address { get; set; }

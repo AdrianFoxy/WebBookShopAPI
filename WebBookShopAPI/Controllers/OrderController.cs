@@ -28,7 +28,7 @@ namespace WebBookShopAPI.Controllers
         {
             var userId = HttpContext.User.RetrieveIdFromPrincipal();
 
-            var order = await _orderService.CreateOrderAsync(orderDto.ContactEmail, orderDto.ContactPhone, orderDto.DeviveryId, orderDto.Address, userId, orderDto.BasketId);
+            var order = await _orderService.CreateOrderAsync(orderDto.ContactName, orderDto.ContactEmail, orderDto.ContactPhone, orderDto.DeviveryId, orderDto.Address, userId, orderDto.BasketId);
 
             if (order == null) return BadRequest(new ApiResponse(400, "Order creating error"));
 
@@ -43,6 +43,13 @@ namespace WebBookShopAPI.Controllers
             var orders = await _orderService.GetOrdersForUserAsync(userId);
             //return Ok(orders);
             return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
+        }
+
+        [HttpGet("deliveryMethods")]
+        public async Task<ActionResult<IReadOnlyList<DeliveryDto>>> GetDeliveryMethods()
+        {
+            var delivery = await _orderService.GetDeliveryMethodsAsync();
+            return Ok(_mapper.Map<IReadOnlyList<DeliveryDto>>(delivery));
         }
 
         [HttpGet("{id}")]
