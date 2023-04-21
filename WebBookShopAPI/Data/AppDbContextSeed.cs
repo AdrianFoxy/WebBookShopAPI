@@ -25,7 +25,7 @@ namespace WebBookShopAPI.Data
                     UserName = "user@gmail.com",
                     DateOfBirth = new DateTime(2001, 11, 27),
                     PhoneNumber = "1234567890",
-                    UserGenderCode = "F"
+                    UserGenderCode = "M"
 
                 };
 
@@ -39,7 +39,7 @@ namespace WebBookShopAPI.Data
                     UserName = "userF@gmail.com",
                     DateOfBirth = new DateTime(2001, 11, 27),
                     PhoneNumber = "1234567890",
-                    UserGenderCode = "M"
+                    UserGenderCode = "F"
 
                 };
 
@@ -59,6 +59,21 @@ namespace WebBookShopAPI.Data
 
                 await userManager.CreateAsync(admin, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(admin, UserRoles.Admin);
+
+                var guest = new AppUser
+                {
+                    Id = "Guest",
+                    FullName = "Guest",
+                    Email = "guest@gmail.com",
+                    UserName = "guest@gmail.com",
+                    DateOfBirth = new DateTime(2001, 11, 27),
+                    PhoneNumber = "1234567890",
+                    UserGenderCode = "M"
+
+                };
+
+                await userManager.CreateAsync(guest, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(guest, UserRoles.User);
             }
         }
     }

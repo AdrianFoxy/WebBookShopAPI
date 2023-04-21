@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Models.OrderEntities;
@@ -50,8 +51,9 @@ namespace WebBookShopAPI.Data.Services
             subtotal = subtotal + deliveryMethod.Price;
 
 
-            // default address
-            if (Address.Length <= 0) Address = "проспект Людвіга Свободи, 33, Харків, Харківська область, 61000";
+            // default values
+            if (Address.IsNullOrEmpty()) Address = "проспект Людвіга Свободи, 33, Харків, Харківська область, 61000";
+            if (UserId.IsNullOrEmpty()) UserId = "Guest";
 
             // create order
             var order = new Order(items, ContactName, ContactEmail, ContactPhone, Address, subtotal, deliveryId, UserId, orderStatus);

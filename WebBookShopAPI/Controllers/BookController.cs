@@ -13,11 +13,6 @@ namespace WebBookShopAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        //public IBookRepository _context;
-        //public BookController(IBookRepository context)
-        //{
-        //    _context = context;
-        //}
 
         private readonly IGenericRepository<Book> _bookRepository;
         private readonly IGenericRepository<Genre> _genreRepository;
