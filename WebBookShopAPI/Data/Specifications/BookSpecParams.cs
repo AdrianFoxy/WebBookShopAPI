@@ -9,10 +9,12 @@
 
         //string? sort, int? publisherId, int? bookseriesId, string? genres, string? authors
         public string? Sort { get; set; }
-        public int? PublisherId { get; set; }
-        public int? BookseriesId { get; set; }
+        public List<int>? PublishersIds { get; set; }
+        public List<int>? BookseriesIds { get; set; }
         public List<int>? GenreIds { get; set; }
         public List<int>? AuthorIds { get; set; }
+        public List<int>? ExceptAuthorIds { get; set; }
+        public List<int>? ExceptGenresIds { get; set; }
         public List<int>? ExceptPublishersId { get; set; } 
         public List<int>? ExceptBookSeriesId { get; set; }
 

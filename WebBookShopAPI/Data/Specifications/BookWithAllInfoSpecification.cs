@@ -15,12 +15,15 @@ namespace WebBookShopAPI.Data.Specifications
         public BookWithAllInfoSpecification(BookSpecParams bookParams)
             : base(x =>
                 (string.IsNullOrEmpty(bookParams.Search) || x.Title.ToLower().Contains(bookParams.Search)) &&
-                (!bookParams.PublisherId.HasValue || x.PublisherId == bookParams.PublisherId) &&
-                (!bookParams.BookseriesId.HasValue || x.BookSeriesId == bookParams.BookseriesId) &&
                 (bookParams.GenreIds == null || bookParams.GenreIds.Count == 0 || x.Genre.Any(x => bookParams.GenreIds.Contains(x.Id))) &&
                 (bookParams.AuthorIds == null || bookParams.AuthorIds.Count == 0 || x.Author.Any(x => bookParams.AuthorIds.Contains(x.Id))) &&
+                (bookParams.BookseriesIds == null || bookParams.BookseriesIds.Count == 0 || bookParams.BookseriesIds.Contains(x.BookSeriesId)) &&
+                (bookParams.PublishersIds == null || bookParams.PublishersIds.Count == 0 || bookParams.PublishersIds.Contains(x.PublisherId)) &&
                 (bookParams.ExceptBookSeriesId == null || !bookParams.ExceptBookSeriesId.Contains(x.BookSeriesId)) &&
-                (bookParams.ExceptPublishersId == null || !bookParams.ExceptPublishersId.Contains(x.PublisherId))
+                (bookParams.ExceptPublishersId == null || !bookParams.ExceptPublishersId.Contains(x.PublisherId)) &&
+                (bookParams.ExceptAuthorIds == null || bookParams.ExceptAuthorIds.Count == 0 || !x.Author.Any(a => bookParams.ExceptAuthorIds.Contains(a.Id))) &&
+                (bookParams.ExceptGenresIds == null || bookParams.ExceptGenresIds.Count == 0 || !x.Genre.Any(a => bookParams.ExceptGenresIds.Contains(a.Id)))
+
             )
         {
 
