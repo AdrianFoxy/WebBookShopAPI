@@ -1,4 +1,5 @@
-﻿using WebBookShopAPI.Data.Models;
+﻿using WebBookShopAPI.Data.Dtos;
+using WebBookShopAPI.Data.Models;
 
 namespace WebBookShopAPI.Data.Interfaces
 {
@@ -6,6 +7,11 @@ namespace WebBookShopAPI.Data.Interfaces
     {
         Task<Book> GetBookByIdAsync(int id);
         Task<IReadOnlyList<Book>> GetAllBooksCatalogAsync();
+        Task<IReadOnlyList<Book>> GetRecommedantiosByAgeGroup(string userId);
+        Task<IReadOnlyList<Book>> GetRecommedantiosByOrders(string userId);
+        Task<List<AuthorWithBookCount>> GetFavoriteAuthors(string userId);
+        Task<List<GenreWithBookCount>> GetFavoriteGenres(string userId);
+        Task<List<Book>> GetPurchasedBooks(string userId);
 
     }
 }

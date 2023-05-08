@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
 using WebBookShopAPI.Data.Helpers;
@@ -18,17 +19,45 @@ namespace WebBookShopAPI.Controllers
         private readonly IGenericRepository<Genre> _genreRepository;
         private readonly IGenericRepository<Author> _authorRepository;
         private readonly IMapper _mapper;
+        private readonly IBookRepository _bookRepo;
+        private readonly ITokenService _tokenService;
+
 
         public BookController(IGenericRepository<Book> booksRepo, IGenericRepository<Genre> genreRepo, IGenericRepository<Author> authorRepo,
-            IMapper mapper)
+            IMapper mapper, IBookRepository bookRepo, ITokenService tokenService)
         {
             _bookRepository = booksRepo;
             _genreRepository = genreRepo;
             _authorRepository = authorRepo;
             _mapper = mapper;
-
+            _bookRepo = bookRepo;
+            _tokenService = tokenService;
         }
 
+        [HttpGet("get-recommedations-by-orders")]
+        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOrders()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var books = await _bookRepo.GetRecommedantiosByOrders(userId);
+            return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
+        }
+
+        [HttpGet("get-recommedations-by-age")]
+        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOAge()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var books = await _bookRepo.GetRecommedantiosByAgeGroup(userId);
+            return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
+        }
+
+        [HttpGet("Test-getPurchasedBooks")]
+        public async Task<ActionResult<BookInCatalogDto>> GetPurschasedBooks()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var books = await _bookRepo.GetPurchasedBooks(userId);
+            return Ok(books);
+
+        }
 
         [HttpGet("catalog_books")]
         public async Task<ActionResult<Pagination<BookInCatalogDto>>> GetAllBooksCatalog([FromQuery] BookSpecParams bookParams)
