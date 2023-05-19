@@ -2,6 +2,7 @@
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models;
+using WebBookShopAPI.Migrations;
 
 namespace WebBookShopAPI.Data.Repositories
 {
@@ -109,7 +110,7 @@ namespace WebBookShopAPI.Data.Repositories
                 .Select(oi => oi.Book)
                 .ToListAsync();
 
-            var recommedations = recommedationsBeforeExcept.Except(purchasedBooks).ToList();
+            var recommedations = recommedationsBeforeExcept.Except(purchasedBooks).Take(12).ToList();
 
             return recommedations;
         }
@@ -141,9 +142,52 @@ namespace WebBookShopAPI.Data.Repositories
                 .ToListAsync();
 
             // Merge booksByAuthors and booksByGenres, by union and except purchasedBooks
-            var recommedations = booksByAuthors.Union(booksByGenres).Except(purchasedBooks).ToList();
+            var recommedations = booksByAuthors.Union(booksByGenres).Except(purchasedBooks).Take(12).ToList();
 
             return recommedations;
+        }
+
+        public async Task<IReadOnlyList<Book>> GetRecommedantionsBestSells()
+        {
+
+            var bestSellingBooks = await _context.OrderItem
+                .GroupBy(oi => oi.BookId)
+                .Select(g => new
+                {
+                    BookId = g.Key,
+                    TotalAmount = g.Sum(oi => oi.Amount)
+                })
+                .OrderByDescending(g => g.TotalAmount)
+                .Take(12)
+                .Join(
+                    _context.Book,
+                    g => g.BookId,
+                    book => book.Id,
+                    (g, book) => book
+                )
+                .Include(a => a.Author)
+                .ToListAsync();
+
+            return bestSellingBooks;
+        }
+
+        public async Task<IReadOnlyList<Book>> GetRecommedationsRandom()
+        {
+            var books = await _context.Book.Include(a => a.Author).ToListAsync();
+
+            Random rnd = new Random();
+            List<Book> bookslist = new List<Book>();
+            var count = books.Count();
+            while(bookslist.Count() != 12)
+            {
+                int randId = rnd.Next(0, count);
+                var result = books.ElementAt(randId);
+                if(!bookslist.Contains(result) && result != null)
+                    bookslist.Add(result);
+
+            }
+
+            return bookslist;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace WebBookShopAPI.Data.Interfaces
         Task<IReadOnlyList<Book>> GetAllBooksCatalogAsync();
         Task<IReadOnlyList<Book>> GetRecommedantiosByAgeGroup(string userId);
         Task<IReadOnlyList<Book>> GetRecommedantiosByOrders(string userId);
+        Task<IReadOnlyList<Book>> GetRecommedantionsBestSells();
+        Task<IReadOnlyList<Book>> GetRecommedationsRandom();
         Task<List<AuthorWithBookCount>> GetFavoriteAuthors(string userId);
         Task<List<GenreWithBookCount>> GetFavoriteGenres(string userId);
         Task<List<Book>> GetPurchasedBooks(string userId);

@@ -43,10 +43,24 @@ namespace WebBookShopAPI.Controllers
         }
 
         [HttpGet("get-recommedations-by-age")]
-        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOAge()
+        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByAge()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var books = await _bookRepo.GetRecommedantiosByAgeGroup(userId);
+            return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
+        }
+
+        [HttpGet("get-best-sells-recommendation")]
+        public async Task<ActionResult<BookInCatalogDto>> GetBestSellsRecommendations()
+        {
+            var books = await _bookRepo.GetRecommedantionsBestSells();
+            return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
+        }
+
+        [HttpGet("get-random-recommedations")]
+        public async Task<ActionResult<BookInCatalogDto>> GetRandomRecommendations()
+        {
+            var books = await _bookRepo.GetRecommedationsRandom();
             return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
         }
 
