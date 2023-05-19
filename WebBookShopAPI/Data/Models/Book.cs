@@ -27,6 +27,8 @@ namespace WebBookShopAPI.Data.Models
         public List<SelectionOfBooks> SelectionOfBooks { get; set; }
         [JsonIgnore]
         public List<OrderItem> OrderItem { get; set; }
+        [JsonIgnore]
+        public List<UserSelectedBook> UserSelectedBook { get; set; }
 
     }
 }

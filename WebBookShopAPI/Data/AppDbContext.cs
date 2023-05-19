@@ -118,6 +118,16 @@ namespace WebBookShopAPI.Data
                     .Property(b => b.Address)
                     .HasDefaultValue("проспект Людвіга Свободи, 33, Харків, Харківська область, 61000");
 
+                modelBuilder.Entity<Review>()
+                    .Property(b => b.UploadedInfo)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                modelBuilder.Entity<Review>()
+                    .Property(b => b.UpdatedInfo)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
             }
 
             // Fields
@@ -163,6 +173,21 @@ namespace WebBookShopAPI.Data
                 m.OrderId);
             }
 
+            // User Selected Book
+            {
+                modelBuilder.Entity<UserSelectedBook>().HasKey(am => new
+                {
+                    am.BookId,
+                    am.AppUserId
+                });
+
+                modelBuilder.Entity<UserSelectedBook>().HasOne(m => m.Book).WithMany(am => am.UserSelectedBook).HasForeignKey(m =>
+                m.BookId);
+
+                modelBuilder.Entity<UserSelectedBook>().HasOne(m => m.AppUser).WithMany(am => am.UserSelectedBook).HasForeignKey(m =>
+                m.AppUserId);
+            }
+
             // Gender For User
             {
                 modelBuilder.Entity<Gender>()
@@ -188,6 +213,8 @@ namespace WebBookShopAPI.Data
         public DbSet<Delivery> Delivery { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<Gender> Gender { get; set; }
+        public DbSet<Review> Review { get; set; }
+        public DbSet<UserSelectedBook> UserSelectedBook { get; set; }
 
     }
 }

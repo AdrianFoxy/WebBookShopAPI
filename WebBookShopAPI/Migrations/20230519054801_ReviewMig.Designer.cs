@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBookShopAPI.Data;
 
@@ -10,9 +11,11 @@ using WebBookShopAPI.Data;
 namespace WebBookShopAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230519054801_ReviewMig")]
+    partial class ReviewMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -665,21 +668,6 @@ namespace WebBookShopAPI.Migrations
                     b.ToTable("SelectionOfBooks");
                 });
 
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.UserSelectedBook", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("BookId", "AppUserId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("UserSelectedBook");
-                });
-
             modelBuilder.Entity("AuthorBook", b =>
                 {
                     b.HasOne("WebBookShopAPI.Data.Models.Author", null)
@@ -871,40 +859,14 @@ namespace WebBookShopAPI.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.UserSelectedBook", b =>
-                {
-                    b.HasOne("WebBookShopAPI.Data.Models.Identity.AppUser", "AppUser")
-                        .WithMany("UserSelectedBook")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebBookShopAPI.Data.Models.Book", "Book")
-                        .WithMany("UserSelectedBook")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("WebBookShopAPI.Data.Models.Book", b =>
                 {
                     b.Navigation("OrderItem");
-
-                    b.Navigation("UserSelectedBook");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.BookSeries", b =>
                 {
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("WebBookShopAPI.Data.Models.Identity.AppUser", b =>
-                {
-                    b.Navigation("UserSelectedBook");
                 });
 
             modelBuilder.Entity("WebBookShopAPI.Data.Models.OrderEntities.Delivery", b =>
