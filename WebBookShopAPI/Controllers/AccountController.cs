@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,9 +7,14 @@ using StackExchange.Redis;
 using System.Security.Claims;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
+using WebBookShopAPI.Data.Helpers;
 using WebBookShopAPI.Data.Interfaces;
+using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Models.Identity;
+using WebBookShopAPI.Data.Repositories;
+using WebBookShopAPI.Data.Specifications;
 using WebBookShopAPI.Extensions;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WebBookShopAPI.Controllers
 {
@@ -19,13 +25,37 @@ namespace WebBookShopAPI.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
+        private readonly IUserRepository _userRepo;
+        private readonly IMapper _mapper;
+
+
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService) 
+            ITokenService tokenService, IUserRepository userRepository, IMapper mapper) 
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _userRepo = userRepository;
+            _mapper = mapper;
         }
+
+
+        [HttpGet("get-all-users")]
+        public async Task<ActionResult<UserListDto>> GetAllUserForAdmin([FromQuery] PaginationParams pagParams)
+        {
+            var response = await _userRepo.GetAllUsersAsync();
+            var totalItems = response.Count();
+
+            var data = response
+                .Skip((pagParams.PageIndex - 1) * pagParams.PageSize)
+                .Take(pagParams.PageSize)
+                .ToList();
+
+            var userList = _mapper.Map<IReadOnlyList<UserListDto>>(data);
+
+            return Ok(new Pagination<UserListDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, userList));
+        }
+
 
         [Authorize]
         [HttpGet]
