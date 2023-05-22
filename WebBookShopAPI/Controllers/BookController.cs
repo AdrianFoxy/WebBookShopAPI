@@ -42,6 +42,26 @@ namespace WebBookShopAPI.Controllers
             return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
         }
 
+        [HttpGet("get-recommedations-by-orders-with-pag")]
+        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOrdersWithPag([FromQuery] PaginationParams pagParams, string userId)
+        {
+
+            var books = await _bookRepo.GetRecommedantiosByOrders(userId);
+            var totalItems = books.Count();
+
+            var data = books
+                .Skip((pagParams.PageIndex - 1) * pagParams.PageSize)
+                .Take(pagParams.PageSize)
+                .ToList();
+
+            var bookList = _mapper.Map<IReadOnlyList<BookInCatalogDto>>(data);
+
+
+            return Ok(new Pagination<BookInCatalogDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, bookList));
+            //return Ok(data);
+
+        }
+
         [HttpGet("get-recommedations-by-age")]
         public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByAge()
         {
