@@ -111,7 +111,6 @@ namespace WebBookShopAPI.Data
 
                 modelBuilder.Entity<Order>()
                      .Property(b => b.OrderStatusId)
-                     .ValueGeneratedOnAddOrUpdate()
                      .HasDefaultValueSql("1");
 
                 modelBuilder.Entity<Order>()

@@ -44,7 +44,6 @@ namespace WebBookShopAPI.Data.Services
 
             // get delivery method
             var deliveryMethod = await _delRepo.GetByIdAsync(deliveryId);
-            var orderStatus = await _orderStatusRepo.GetByIdAsync(1);
 
             // calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Amount);
@@ -56,7 +55,7 @@ namespace WebBookShopAPI.Data.Services
             if (UserId.IsNullOrEmpty()) UserId = "Guest";
 
             // create order
-            var order = new Order(items, ContactName, ContactEmail, ContactPhone, Address, subtotal, deliveryId, UserId, orderStatus);
+            var order = new Order(items, ContactName, ContactEmail, ContactPhone, Address, subtotal, deliveryId, UserId);
 
             // save to db
             await _context.Order.AddAsync(order);
@@ -92,6 +91,7 @@ namespace WebBookShopAPI.Data.Services
                 .ThenInclude(n => n.Book)
                 .Include(n => n.Delivery)
                 .Include(n => n.OrderStatus)
+                .Where(n => n.AppUserId == UserId)
                 .ToListAsync();
 
             return orders;
@@ -101,6 +101,30 @@ namespace WebBookShopAPI.Data.Services
         {
             var delMethods = await _context.Delivery.ToListAsync();
             return delMethods;
+        }
+
+        public async Task<bool> ChangeOrderStatusAsync(int orderId, int orderStatusId)
+        {
+            var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
+            if (order == null) return false;
+            if (order.OrderStatusId != 1 && orderStatusId == 8) return false;
+
+            order.OrderStatusId = orderStatusId;
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
+
+        public async Task<IReadOnlyList<Order>> GetOrdersForAdminAsync()
+        {
+            var orders = await _context.Order
+                    .Include(n => n.OrderItem)
+                    .ThenInclude(n => n.Book)
+                    .Include(n => n.Delivery)
+                    .Include(n => n.OrderStatus)
+                    .ToListAsync();
+
+            return orders;
         }
     }
 }

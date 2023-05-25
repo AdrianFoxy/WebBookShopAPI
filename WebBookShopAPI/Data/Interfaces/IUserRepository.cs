@@ -1,7 +1,7 @@
 ﻿using WebBookShopAPI.Data.Models;
 using WebBookShopAPI.Data.Models.Identity;
 
-namespace WebBookShopAPI.Data.Repositories
+namespace WebBookShopAPI.Data.Interfaces
 {
     public interface IUserRepository
     {

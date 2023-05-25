@@ -8,7 +8,7 @@ namespace WebBookShopAPI.Data.Models.OrderEntities
     {
         public Order() { }
         public Order(IReadOnlyList<OrderItem> OrderItems, string ContactName, string ContactEmail, string ContactPhone, string Address,
-            decimal Sum, int DeliveryId, string UserId, OrderStatus OrderStatus) {
+            decimal Sum, int DeliveryId, string UserId) {
             this.OrderItem = OrderItems;
             this.ContactName = ContactName;
             this.ContactEmail = ContactEmail;
@@ -17,7 +17,6 @@ namespace WebBookShopAPI.Data.Models.OrderEntities
             this.Sum = Sum;
             this.DeliveryId = DeliveryId;
             this.AppUserId = UserId;
-            this.OrderStatus = OrderStatus;
         }
         public string ContactName { get; set; }
         public string ContactEmail { get; set; }

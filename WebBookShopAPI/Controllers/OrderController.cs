@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using WebBookShopAPI.Data;
 using WebBookShopAPI.Data.Dtos;
 using WebBookShopAPI.Data.Errors;
+using WebBookShopAPI.Data.Helpers;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models.OrderEntities;
 using WebBookShopAPI.Extensions;
@@ -18,9 +20,12 @@ namespace WebBookShopAPI.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
-        public OrderController(IOrderService orderService, IMapper mapper) {
+        private readonly AppDbContext _context;
+
+        public OrderController(IOrderService orderService, IMapper mapper, AppDbContext context) {
             _orderService = orderService;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpPost]
@@ -35,14 +40,47 @@ namespace WebBookShopAPI.Controllers
             return Ok(order);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetOrdersForUser()
+        [HttpPut("change-order-status")]
+        public async Task<ActionResult> ChangeOrderStatusAsync(int orderId, int orderStatusId)
+        {
+            var response = await _orderService.ChangeOrderStatusAsync(orderId, orderStatusId);
+            if (response) return Ok("Status Updated");
+            else return BadRequest("Status Update ERROR");
+        }
+
+        [HttpGet("get-orders-for-current-user")]
+        public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetOrdersForUser([FromQuery] PaginationParams pagParams)
         {
             var userId = HttpContext.User.RetrieveIdFromPrincipal();
 
             var orders = await _orderService.GetOrdersForUserAsync(userId);
-            //return Ok(orders);
-            return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
+            var totalItems = orders.Count();
+
+            var data = orders
+                .Skip((pagParams.PageIndex - 1) * pagParams.PageSize)
+                .Take(pagParams.PageSize)
+                .ToList();
+
+            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, orderList));
+        }
+
+        [HttpGet("get-orders-for-admin")]
+        public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetOrdersForAdmin([FromQuery] PaginationParams pagParams)
+        {
+            var orders = await _orderService.GetOrdersForAdminAsync();
+            var totalItems = orders.Count();
+
+            var data = orders
+                .Skip((pagParams.PageIndex - 1) * pagParams.PageSize)
+                .Take(pagParams.PageSize)
+                .ToList();
+
+            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, orderList));
+
         }
 
         [HttpGet("deliveryMethods")]
