@@ -10,6 +10,7 @@ using WebBookShopAPI.Data.Helpers;
 using WebBookShopAPI.Data.Interfaces;
 using WebBookShopAPI.Data.Models.OrderEntities;
 using WebBookShopAPI.Extensions;
+using WebBookShopAPI.Migrations;
 
 namespace WebBookShopAPI.Controllers
 {
@@ -41,10 +42,11 @@ namespace WebBookShopAPI.Controllers
         }
 
         [HttpPut("change-order-status")]
-        public async Task<ActionResult> ChangeOrderStatusAsync(int orderId, int orderStatusId)
+        public async Task<ActionResult<OrderToReturnDto>> ChangeOrderStatusAsync(int orderId, int orderStatusId)
         {
             var response = await _orderService.ChangeOrderStatusAsync(orderId, orderStatusId);
-            if (response) return Ok("Status Updated");
+            var order = await _orderService.GetOrderByIdAsync(orderId);
+            if (response) return _mapper.Map<OrderToReturnDto>(order);
             else return BadRequest("Status Update ERROR");
         }
 
@@ -61,7 +63,7 @@ namespace WebBookShopAPI.Controllers
                 .Take(pagParams.PageSize)
                 .ToList();
 
-            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);
+            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(data);
 
             return Ok(new Pagination<OrderToReturnDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, orderList));
         }
@@ -77,7 +79,7 @@ namespace WebBookShopAPI.Controllers
                 .Take(pagParams.PageSize)
                 .ToList();
 
-            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders);
+            var orderList = _mapper.Map<IReadOnlyList<OrderToReturnDto>>(data);
 
             return Ok(new Pagination<OrderToReturnDto>(pagParams.PageIndex, pagParams.PageSize, totalItems, orderList));
 
@@ -95,7 +97,7 @@ namespace WebBookShopAPI.Controllers
         {
             var userId = HttpContext.User.RetrieveIdFromPrincipal();
 
-            var order = await _orderService.GetOrderByIdAsync(id, userId);
+            var order = await _orderService.GetOrderByIdAsync(id);
 
             if (order == null) return NotFound(new ApiResponse(404));
 

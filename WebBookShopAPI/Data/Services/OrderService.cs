@@ -69,7 +69,7 @@ namespace WebBookShopAPI.Data.Services
         }
 
 
-        public async Task<Order> GetOrderByIdAsync(int OrderId, string UserId)
+        public async Task<Order> GetOrderByIdAsync(int OrderId)
         {
 
             var order = await _context.Order

@@ -66,7 +66,6 @@ namespace WebBookShopAPI.Data
 
                 modelBuilder.Entity<Book>()
                      .Property(b => b.Rating)
-                     .ValueGeneratedOnAddOrUpdate()
                      .HasDefaultValueSql("0");
 
                 modelBuilder.Entity<Publisher>()
