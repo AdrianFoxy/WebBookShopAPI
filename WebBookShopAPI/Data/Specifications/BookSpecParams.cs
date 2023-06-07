@@ -17,6 +17,8 @@
         public List<int>? ExceptGenresIds { get; set; }
         public List<int>? ExceptPublishersId { get; set; } 
         public List<int>? ExceptBookSeriesId { get; set; }
+        public DateTime? MinUploadDate { get; set; }
+        public DateTime? MaxUploadDate { get; set; }
 
         private string? _search;
         public string? Search 

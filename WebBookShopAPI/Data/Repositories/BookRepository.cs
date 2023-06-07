@@ -115,7 +115,7 @@ namespace WebBookShopAPI.Data.Repositories
             return recommedations;
         }
 
-        public async Task<IReadOnlyList<Book>> GetRecommedantiosByOrders(string userId)
+        public async Task<IReadOnlyList<Book>> GetRecommedantiosByOrders(string userId, DateTime? startDate, DateTime? endDate)
         {
             // Get purchased books
             var purchasedBooks = await GetPurchasedBooks(userId);
@@ -134,11 +134,13 @@ namespace WebBookShopAPI.Data.Repositories
             var booksByAuthors = await _context.Book
                 .Include(a => a.Author)
                 .Where(book => book.Author.Any(author => authorsIds.Contains(author.Id)))
+                .Where(book => book.UploadedInfo >= startDate && book.UploadedInfo <= endDate)
                 .ToListAsync();
 
             var booksByGenres = await _context.Book
                 .Include(a => a.Author)
                 .Where(book => book.Genre.Any(genre => genresIds.Contains(genre.Id)))
+                .Where(book => book.UploadedInfo >= startDate && book.UploadedInfo <= endDate)
                 .ToListAsync();
 
             // Merge booksByAuthors and booksByGenres, by union and except purchasedBooks

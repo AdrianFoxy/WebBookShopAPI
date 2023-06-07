@@ -22,7 +22,9 @@ namespace WebBookShopAPI.Data.Specifications
                 (bookParams.ExceptBookSeriesId == null || !bookParams.ExceptBookSeriesId.Contains(x.BookSeriesId)) &&
                 (bookParams.ExceptPublishersId == null || !bookParams.ExceptPublishersId.Contains(x.PublisherId)) &&
                 (bookParams.ExceptAuthorIds == null || bookParams.ExceptAuthorIds.Count == 0 || !x.Author.Any(a => bookParams.ExceptAuthorIds.Contains(a.Id))) &&
-                (bookParams.ExceptGenresIds == null || bookParams.ExceptGenresIds.Count == 0 || !x.Genre.Any(a => bookParams.ExceptGenresIds.Contains(a.Id)))
+                (bookParams.ExceptGenresIds == null || bookParams.ExceptGenresIds.Count == 0 || !x.Genre.Any(a => bookParams.ExceptGenresIds.Contains(a.Id))) &&
+                (bookParams.MinUploadDate == null || x.UploadedInfo >= bookParams.MinUploadDate) &&
+                (bookParams.MaxUploadDate == null || x.UploadedInfo <= bookParams.MaxUploadDate)
 
             )
         {

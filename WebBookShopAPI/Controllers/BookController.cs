@@ -34,19 +34,22 @@ namespace WebBookShopAPI.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpGet("get-recommedations-by-orders")]
+/*        [HttpGet("get-recommedations-by-orders")]
         public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOrders()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var books = await _bookRepo.GetRecommedantiosByOrders(userId);
             return Ok(_mapper.Map<IReadOnlyList<BookInCatalogDto>>(books));
-        }
+        }*/
 
         [HttpGet("get-recommedations-by-orders-with-pag")]
-        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOrdersWithPag([FromQuery] PaginationParams pagParams, string userId)
+        public async Task<ActionResult<BookInCatalogDto>> GetRecommedantionsByOrdersWithPag([FromQuery] PaginationParams pagParams, string userId, DateTime? MinUploadDate, DateTime? MaxUploadDate)
         {
 
-            var books = await _bookRepo.GetRecommedantiosByOrders(userId);
+            if (MinUploadDate == null) MinUploadDate = new DateTime(1900, 6, 7);
+            if (MaxUploadDate == null) MaxUploadDate = DateTime.Today;
+
+            var books = await _bookRepo.GetRecommedantiosByOrders(userId, MinUploadDate, MaxUploadDate);
             var totalItems = books.Count();
 
             var data = books
